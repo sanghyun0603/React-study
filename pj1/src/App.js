@@ -1,6 +1,8 @@
 import './App.css';
 import { useState } from 'react';
-
+import { Routes, Route, useNavigate, Outlet} from 'react-router-dom';
+import Detail from './pages/Detail.js';
+import {useStore, testStore} from './store.js';
 // document.querySelector('h4').innerHTML = post; 원래는 이렇게
   // js중괄호 문법사용. 데이터바인딩
   // 어디서든 사용가능
@@ -87,26 +89,136 @@ import { useState } from 'react';
 // state변경함수는 늦게처리됨 그래서 다음줄이 먼저 실행됨
 function App() {
 
-  let post = '강남 우동 맛집';
   let [title, setTitle] = useState(['남자 코트 추천','강남 우동 맛집', '파이썬독학']);
   //let [logo, setLogo] = useState('ReactBlog');//비추천적인방법. 변경이 됐을때 바로 반영할필요가 있을때에만 써라
   let [likes, setLikes] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
   let [chooseTitle, setChooseTitle] = useState(0);
   let [inputData, setInputData] = useState('');
-
-
+  let navigate = useNavigate();
+  const { bears, increasePopulation, removeAllBears } = useStore(state => state)
+  const { cart, increaseCount} = testStore(state => state)
   return (
     <div className="App">
       <div className="black-nav">
         <h4 style={ { color : 'red' , fontSize : '30px'} }>ReactBlog</h4>
+        <p>
+          <button onClick={()=>{ navigate('/') }}>홈</button>
+          <button onClick={()=>{ navigate('/detail') }}>디테일</button>
+        </p>
       </div>
-      <button onClick={()=>{
-        let copy =[...title];
-        copy.sort();
-        setTitle(copy);
-      }}>가나다순정렬</button>
-      {/* <div className ="list">
+      <Routes>
+        <Route path='/' element={
+          <div>
+            <button onClick={()=>{
+            let copy =[...title];
+            copy.sort();
+            setTitle(copy);
+            }}>가나다순정렬</button>
+            <h1>{bears} around here ...</h1>
+            <button onClick={()=>{increasePopulation()}}>one up</button>
+            <button onClick={()=>{removeAllBears()}}>remove all</button>
+            {
+              cart.map((data,i)=>{
+                return (
+                  <div key = {i}>
+                    <h2>{data.name}</h2>
+                    <h3>{data.count}
+                      <button onClick={()=>{increaseCount(data.id)}}>
+                        +
+                      </button>
+                    </h3>
+                  </div>
+                )
+              })
+            }
+          {
+            title.map(function(titlez, i){
+              return (
+                <div className ="list" key={i}>
+                  <h4 onClick={()=>{
+                    setChooseTitle(i); 
+                    setModal(!modal);
+                    }}>{ titlez }
+                  <span onClick={(e)=>{
+                    e.stopPropagation();
+                    let copy = [...likes];
+                    copy[i] += 1;
+                    setLikes(copy);
+                  }}>💖
+                  </span> { likes[i] } 
+                  </h4>
+                  <p>2월 17일 발행</p>
+                  <button onClick={()=>{
+                    let copy = [...title];
+                    let copyLikes = [...likes];
+                    copy.splice(i,1);
+                    copyLikes.splice(i,1);
+                    setLikes(copyLikes);
+                    setTitle(copy);
+                  }}>삭제</button>
+                </div>
+              )
+            })
+          }
+  
+          <input type="text" onChange={(e)=>{ setInputData(e.target.value);
+          }}></input>
+          <button onClick={()=>{
+            if (inputData === '') {
+              alert('내용입력해라')
+            } else
+            {
+              let copy = [...title];
+              let copyLikes = [...likes];
+              copy.unshift(inputData);
+              copyLikes.unshift(0);
+              setLikes(copyLikes);
+              setTitle(copy);
+            }
+            
+          }}>글작성</button>
+  
+            {
+              modal === true ? <Modal setTitle = {setTitle} chooseTitle = {chooseTitle} title = {title}></Modal> : null
+            }
+            </div>
+        }/>
+      <Route path='/detail' element={<Detail/>}/>
+
+      </Routes>
+
+      
+    </div>
+  );
+}
+
+//let Modal = () => {
+  //return () }도 가능
+
+function Modal(props){
+
+  let array = ['여자 코트 추천', '대전 우동 맛집', 'C++독학']
+  return (
+    <div className="modal">
+          <h4>{props.title[props.chooseTitle]}</h4>
+          <p>날짜</p>
+          <p>상세내용</p>
+          <button onClick={()=>{
+            let copy = [...props.title];
+            copy[props.chooseTitle] = array[props.chooseTitle];
+            props.setTitle(copy);
+          }}>글수정</button>
+    </div>
+  )
+}
+
+export default App;
+
+
+
+
+ {/* <div className ="list">
         <h4>{ title[0] } <span onClick={()=>{
           let copy = [...likes];
           copy[0] += 1;
@@ -142,80 +254,3 @@ function App() {
         }}>💖</span> { likes[2] } </h4>
         <p>2월 17일 발행</p>
       </div> */}
-      {
-        title.map(function(titlez, i){
-          return (
-            <div className ="list" key={i}>
-              <h4 onClick={()=>{
-                setChooseTitle(i); 
-                setModal(!modal);
-                }}>{ titlez }
-              <span onClick={(e)=>{
-                e.stopPropagation();
-                let copy = [...likes];
-                copy[i] += 1;
-                setLikes(copy);
-              }}>💖
-              </span> { likes[i] } 
-      
-              </h4>
-              <p>2월 17일 발행</p>
-              <button onClick={()=>{
-                let copy = [...title];
-                let copyLikes = [...likes];
-                copy.splice(i,1);
-                copyLikes.splice(i,1);
-                setLikes(copyLikes);
-                setTitle(copy);
-              }}>삭제</button>
-            </div>
-          )
-        })
-      }
-
-      <input type="text" onChange={(e)=>{ setInputData(e.target.value);
-      }}></input>
-      <button onClick={()=>{
-        if (inputData === '') {
-          alert('내용입력해라')
-        } else
-        {
-          let copy = [...title];
-          let copyLikes = [...likes];
-          copy.unshift(inputData);
-          copyLikes.unshift(0);
-          setLikes(copyLikes);
-          setTitle(copy);
-        }
-        
-      }}>글작성</button>
-
-      {
-        modal === true ? <Modal setTitle = {setTitle} chooseTitle = {chooseTitle} title = {title}></Modal> : null
-      }
-      
-    </div>
-  );
-}
-
-//let Modal = () => {
-  //return () }도 가능
-
-function Modal(props){
-
-  let array = ['여자 코트 추천', '대전 우동 맛집', 'C++독학']
-  return (
-    <div className="modal">
-          <h4>{props.title[props.chooseTitle]}</h4>
-          <p>날짜</p>
-          <p>상세내용</p>
-          <button onClick={()=>{
-            let copy = [...props.title];
-            copy[props.chooseTitle] = array[props.chooseTitle];
-            props.setTitle(copy);
-          }}>글수정</button>
-    </div>
-  )
-}
-
-export default App;
