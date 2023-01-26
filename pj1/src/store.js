@@ -1,4 +1,6 @@
 import {create} from 'zustand' // create로 zustand를 불러옵니다.
+import { persist } from "zustand/middleware"; // localStorage 
+
 
 const useStore = create(set => ({
   bears: 0,
@@ -10,23 +12,43 @@ const useStore = create(set => ({
     set(state => ({ bears : 0 }));
   }
 }))
-function increaseCounts(ca,id) {
-  ca.map((cas)=>{
-    if (id === cas.id) {
-      cas.count += 1;
+
+const testStore = create(
+    persist(
+      (set) => ({
+        cart : [
+            {id : 0, name : 'White and Black', count : 2},
+            {id : 1, name : 'Grey Yordan', count : 1}
+        ],
+        increaseCount : (id) => {
+          set(state => ({ cart : increaseCounts(state.cart, id )}));
+        },
+        decreaseCount : (id) => {
+          set(state => ({ cart : decreaseCounts(state.cart, id )}));
+        }
+    }),
+      { name : "cartStore"}
+    )
+  )
+
+const increaseCounts = (cart,id) => {
+  cart.map((item)=>{
+    if (id === item.id) {
+      item.count += 1;
     }
-    return cas
+    return item
   })
-  return ca
+  return cart
 }
-const testStore = create(set => ({
-    cart : [
-        {id : 0, name : 'White and Black', count : 2},
-        {id : 1, name : 'Grey Yordan', count : 1}
-    ],
-    increaseCount : (id) => {
-      set(state => ({ cart : increaseCounts(state.cart,id)}));
+
+const decreaseCounts = (cart,id) => {
+  cart.map((item) => {
+    if (id === item.id && item.count > 0) {
+      item.count -= 1;
     }
-}))
+    return item
+  })
+  return cart
+}
 
 export {useStore, testStore}

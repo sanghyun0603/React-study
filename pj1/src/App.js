@@ -1,8 +1,9 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, Outlet} from 'react-router-dom';
 import Detail from './pages/Detail.js';
 import {useStore, testStore} from './store.js';
+import axios from 'axios';
 // document.querySelector('h4').innerHTML = post; 원래는 이렇게
   // js중괄호 문법사용. 데이터바인딩
   // 어디서든 사용가능
@@ -89,6 +90,15 @@ import {useStore, testStore} from './store.js';
 // state변경함수는 늦게처리됨 그래서 다음줄이 먼저 실행됨
 function App() {
 
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    console.log(vh);
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+  useEffect(() => {
+    setScreenSize();
+  });
+
   let [title, setTitle] = useState(['남자 코트 추천','강남 우동 맛집', '파이썬독학']);
   //let [logo, setLogo] = useState('ReactBlog');//비추천적인방법. 변경이 됐을때 바로 반영할필요가 있을때에만 써라
   let [likes, setLikes] = useState([0,0,0]);
@@ -97,7 +107,7 @@ function App() {
   let [inputData, setInputData] = useState('');
   let navigate = useNavigate();
   const { bears, increasePopulation, removeAllBears } = useStore(state => state)
-  const { cart, increaseCount} = testStore(state => state)
+  const { cart, increaseCount, decreaseCount } = testStore(state => state)
   return (
     <div className="App">
       <div className="black-nav">
@@ -111,21 +121,33 @@ function App() {
         <Route path='/' element={
           <div>
             <button onClick={()=>{
+              axios.get('http://127.0.0.1:8000/movies/')
+              .then((request)=>{
+                console.log(request.data)
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+            }}>영화정보테스트</button>
+            <button onClick={()=>{
             let copy =[...title];
             copy.sort();
             setTitle(copy);
             }}>가나다순정렬</button>
-            <h1>{bears} around here ...</h1>
-            <button onClick={()=>{increasePopulation()}}>one up</button>
-            <button onClick={()=>{removeAllBears()}}>remove all</button>
+            <p>{bears} around here ...</p>
+            <button onClick={()=>{ increasePopulation() }}>one up</button>
+            <button onClick={()=>{ removeAllBears() }}>remove all</button>
             {
               cart.map((data,i)=>{
                 return (
                   <div key = {i}>
                     <h2>{data.name}</h2>
                     <h3>{data.count}
-                      <button onClick={()=>{increaseCount(data.id)}}>
+                      <button onClick={()=>{ increaseCount(data.id) }}>
                         +
+                      </button>
+                      <button onClick={()=>{ decreaseCount(data.id) }}>
+                        -
                       </button>
                     </h3>
                   </div>
