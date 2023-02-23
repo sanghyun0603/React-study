@@ -193,3 +193,54 @@ function Event(){
 }
 
 export default App;
+
+
+// api.interceptors.response.use(
+//   function (response) {
+//       return response;
+//   },
+//   async function (error) {
+//       const { config, response } = error;
+//       const originalRequest = config;
+
+//       if (response && response.data.error.code === 'ACCESS_TOKEN_EXPIRED') {
+//           const refreshToken = localStorage.getItem('refresh-token');
+
+//           const header = {};
+
+//           header['refresh-token'] = refreshToken;
+
+//           await axios
+//               .post(`${BASE_URL}auth/reissue`, null, {
+//                   headers: header,
+//               })
+//               .then(res => {
+//                   if (res.data.data === 'Reissue Success') {
+//                       const newAccessToken = res.headers.authorization;
+//                       const newRefreshToken = res.headers['refresh-token'];
+
+//                       originalRequest.headers.authorization = newAccessToken;
+//                       originalRequest.headers['refresh-token'] =
+//                           newRefreshToken;
+
+//                       localStorage.setItem('access-token', newAccessToken);
+//                       localStorage.setItem('refresh-token', newRefreshToken);
+
+//                       return axios(originalRequest);
+//                   }
+//                   return Promise.reject(error);
+//               })
+//               .catch(err => {
+//                   if (
+//                       err.response.data.error.code === 'REFRESH_TOKEN_EXPIRED'
+//                   ) {
+//                       localStorage.removeItem('access-token');
+//                       localStorage.removeItem('refresh-token');
+//                       window.location.replace = '/login';
+//                   }
+//               });
+//       }
+
+//       return Promise.reject(error);
+//   },
+// );
