@@ -1,9 +1,9 @@
-var cutZero = function (s) {
-    var res = s.replace(/^0+/, "");
+const cutZero = (s) => {
+    let res = s.replace(/^0+/, "");
     return res;
 };
-var removeDash = function (s) {
-    var res = s.replace(/-/g, "");
+const removeDash = (s) => {
+    let res = s.replace(/-/g, "");
     return parseFloat(res);
 };
 console.log(cutZero("0응응"));

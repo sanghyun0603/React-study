@@ -1,0 +1,22 @@
+<script>
+//옛날 문법
+
+// function machine(q,w) {
+// 	this.q = q;
+// 	this.w = w;
+// }
+// let nunu = new machine('consume','snowball')
+// let garen = new machine('strike','courage')
+
+// //ES6문법
+
+class Hero {
+	constructor(q,w){
+		this.q = q;
+		this.w = w;
+	}
+}
+Hero.prototype.name = 'kim';
+let nunu = new Hero('consume','snowball')
+let garen = new Hero('strike','courage')
+</script>
