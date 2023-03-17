@@ -49,6 +49,21 @@ console.log(maxFunc(1, 2, 3, 4, 5, 6, 76, 44, 33));
 
 // let fff = func(userInfo);
 
-type Work3 = number | string | boolean[];
+type Work3 = (number | string | boolean)[];
 
 const ddd: Work3 = [40, "wine", false];
+
+const func3 = (arr: (number | string | boolean)[]) => {
+  arr.forEach((i) => {
+    console.log(i);
+  });
+};
+func3(ddd);
+
+function 함수(parameter: string) {
+  if (typeof parameter === "string") {
+    parameter + 1;
+  } else {
+    parameter;
+  }
+}

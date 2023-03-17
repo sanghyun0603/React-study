@@ -10,3 +10,17 @@ const maxFunc = (...parmas) => {
 };
 console.log(maxFunc(1, 2, 3, 4, 5, 6, 76, 44, 33));
 const ddd = [40, "wine", false];
+const func3 = (arr) => {
+    arr.forEach((i) => {
+        console.log(i);
+    });
+};
+func3(ddd);
+function 함수(parameter) {
+    if (typeof parameter === "string") {
+        parameter + 1;
+    }
+    else {
+        parameter;
+    }
+}
