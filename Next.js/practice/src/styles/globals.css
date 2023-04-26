@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+ 
+.title {
+  text-align: center;
+  margin-top: 150px;
+}
+.title-sub {
+  text-align: center;
+}
+.navbar {
+  background: white;
+  height: 100px;
+  padding: 20px;
+}
+.navbar a {
+  margin-right: 10px;
+  text-decoration: none;
+} 
