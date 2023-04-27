@@ -1,6 +1,5 @@
 import { MongoClient, MongoClientOptions } from "mongodb";
 const url =
-  "mongodb+srv://admin:zhelddovmf@cluster0.ifpc1jw.mongodb.net/?retryWrites=true&w=majority";
 
 const options: MongoClientOptions = {
   useNewUrlParser: true,
