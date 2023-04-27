@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 interface NavbarProps {
   children: ReactNode;
 }
-export default function navbar({ children }: NavbarProps) {
+export default function Navbar({ children }: NavbarProps) {
   return (
     <div className="navbar">
       <Link href="/">Home</Link>

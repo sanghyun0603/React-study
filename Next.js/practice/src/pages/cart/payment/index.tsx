@@ -1,3 +1,8 @@
+import CardEvent from "@/components/event/Event";
+import Navbar from "@/components/navbar/Navbar";
+import type { ReactElement, ReactNode } from "react";
+import type { NextPageWithLayout } from "@/pages/_app";
+
 function PaymentPage() {
   return (
     <div>
@@ -5,5 +10,11 @@ function PaymentPage() {
     </div>
   );
 }
-
+PaymentPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Navbar>
+      <CardEvent>{page}</CardEvent>
+    </Navbar>
+  );
+};
 export default PaymentPage;

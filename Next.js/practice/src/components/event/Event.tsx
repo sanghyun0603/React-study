@@ -4,7 +4,7 @@ interface EventPropsType {
   children: ReactNode;
 }
 
-export default function Event({ children }: EventPropsType) {
+export default function CardEvent({ children }: EventPropsType) {
   return (
     <div>
       <p>현대카드 무이자 이벤트중</p>
