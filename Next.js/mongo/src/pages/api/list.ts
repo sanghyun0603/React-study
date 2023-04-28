@@ -1,4 +1,6 @@
+import type { RequestData } from "next/dist/server/web/types";
 import { MongoClient, MongoClientOptions } from "mongodb";
+
 const url =
   "mongodb+srv://admin:qwer1234@cluster0.ifpc1jw.mongodb.net/?retryWrites=true&w=majority";
 
@@ -18,13 +20,13 @@ if (process.env.NODE_ENV === "development") {
 } else {
   connectDB = new MongoClient(url, options).connect();
 }
-const DbData = async () => {
-  let client = await connectDB;
-  const db = client.db("forum");
-  let result = await db.collection("post").find().toArray();
-  return result;
-};
 
-const results = DbData();
-
-export { results, connectDB };
+export default async function handler(request: RequestData, response: any) {
+  if (request.method == "GET") {
+    console.log(123);
+    let client = await connectDB;
+    const db = client.db("forum");
+    let result = await db.collection("post").find().toArray();
+    response.status(200).json(result);
+  }
+}
