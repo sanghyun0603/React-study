@@ -2,7 +2,7 @@ import type { RequestData } from "next/dist/server/web/types";
 import { MongoClient, MongoClientOptions } from "mongodb";
 
 const url =
-  "mongodb+srv://admin:qwer1234@cluster0.ifpc1jw.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://admin:qmffndk63@cluster0.ifpc1jw.mongodb.net/?retryWrites=true&w=majority";
 
 const options: MongoClientOptions = {
   useNewUrlParser: true,

@@ -19,17 +19,20 @@ export async function getServerSideProps() {
 
 export default function List({ message }: any) {
   return (
-    <div className="list-bg">
-      {message.map((data: MessageType, i: number) => {
-        return (
-          <div className="list-item" key={i}>
-            <Link href={`/detail/${data._id}`}>
-              <h4>{data.title}</h4>
-              <p>{data.content}</p>
-            </Link>
-          </div>
-        );
-      })}
+    <div>
+      <Link href={"/write"}>글작성</Link>
+      <div className="list-bg">
+        {message.map((data: MessageType, i: number) => {
+          return (
+            <div className="list-item" key={i}>
+              <Link href={`/detail/${data._id}`}>
+                <h4>{data.title}</h4>
+                <p>{data.content}</p>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
