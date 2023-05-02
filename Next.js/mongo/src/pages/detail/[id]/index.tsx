@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { connectDB } from "../../../../util/mongo";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
