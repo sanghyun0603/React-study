@@ -13,7 +13,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  // 페이지 단위에서 정의한 레이아웃이 있다면 해당 레이아웃을 적용한다.
+  // 페이지 단위에서 정의한 레이아웃이 있다면 해당 레이아웃을 적용한다
   const getLayout = Component.getLayout ?? ((page) => page);
   return getLayout(<Component {...pageProps} />);
 }
