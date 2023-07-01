@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+        /* fixed는 왼쪽끝에서부터 시작해서 뷰포트에 고정됨 (스크롤시에도 원래 위치 유지) */
+        /* absolute는 상위 relative를 기준으로 설정 */
+        /* relative 원래있어야하는 위치에서 이동 */
+      div {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        border: 2px solid #6fff53;
+        border-radius: 10px;
+      }
+      .box1 {
+        background: #938e73;
+      }
+      .box2 {
+        background: #29b748;
+        position: relative;
+        left: 50px;
+      }
+      .box3 {
+        background: #2990a4;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+      }
+      .box4 {
+        background: #b92cdc;
+        position: fixed;
+        top: 150px;
+        left: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box1"></div>
+    <div class="box2"><div class="box3"></div></div>
+
+    <div class="box4"></div>
+    <p>fixed 테스트</p>
+    <p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p><p>fixed 테스트</p>
+</body>
+</html>

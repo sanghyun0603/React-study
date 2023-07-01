@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <!-- span빼고 blcokelement라고 생각하면 쉽다. block element 안에 inline element 포함가능 -->
+    <div style="background-color: red; width: 200px;">
+      blcok <div>level</div> element
+    </div>
+    <br />
+    <span style="background-color: red; width: 200px;"
+      >blcok
+      <div>level</div>
+      element
+    </span>
+    <span style="background-color: red; width: 200px; display: block;"
+      >blcok
+      <div>level</div>
+      <span>level</span>
+      element
+    </span>
+  </body>
+</html>
+<!-- display none hidden 차이점 이해하자. none은 아에 사라짐 hidden은 말그대로 있는데 숨김 -->
+<!-- 크롬에서는 none도 hidden과 동일하게 동작 -->
+<!-- inline-block 특성은 block과 inline 특성 모두 가짐. -->
+<!-- 원래 인라인은 크기및 마진 패딩 지정 불가능한데 이건 지정가능하다. -->
