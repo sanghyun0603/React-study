@@ -1,29 +1,29 @@
-import React from 'react';
-import tw from 'tailwind-styled-components';
-import Navbar from '@/components/navbar/Navbar';
-import type { ReactElement } from 'react';
-import { useEffect, useState } from 'react';
-import UserInfo from '@/components/mypage/UserInfo';
-import Contents from '@/components/mypage/Contents';
-import { getCookie } from 'cookies-next';
-import axios from 'axios';
-import type { GetServerSideProps } from 'next';
-import wrapper from '@/store';
-import { setLogin } from '@/store/slice/loginSlice';
-import { setMypage } from '@/store/slice/mypageSlice';
-import { setUser } from '@/store/slice/userSlice';
-import Login from '@/components/login/Login';
+import React from "react";
+import tw from "tailwind-styled-components";
+import Navbar from "@/components/navbar/Navbar";
+import type { ReactElement } from "react";
+import { useEffect, useState } from "react";
+import UserInfo from "@/components/mypage/UserInfo";
+import Contents from "@/components/mypage/Contents";
+import { getCookie } from "cookies-next";
+import axios from "axios";
+import type { GetServerSideProps } from "next";
+import wrapper from "@/store";
+import { setLogin } from "@/store/slice/loginSlice";
+import { setMypage } from "@/store/slice/mypageSlice";
+import { setUser } from "@/store/slice/userSlice";
+import Login from "@/components/login/Login";
 
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (context: any) => {
     const { req, res } = context;
-    let refreshtoken = getCookie('refreshtoken', { req, res });
-    let accesstoken = getCookie('accesstoken', { req, res });
+    let refreshtoken = getCookie("refreshtoken", { req, res });
+    let accesstoken = getCookie("accesstoken", { req, res });
     const api = axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_URL,
       headers: {
         Authorization: accesstoken,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Cookie: `refreshtoken=` + refreshtoken,
       },
     });
@@ -33,13 +33,13 @@ export const getServerSideProps: GetServerSideProps =
       store.dispatch(setLogin({ isLogin: true }));
       store.dispatch(setMypage(res));
       store.dispatch(setUser(res.profile));
-      return { props: { message: 'Login' } };
+      return { props: { message: "Login" } };
     } catch (e) {
       console.log(e);
       store.dispatch(setLogin({ isLogin: false }));
-      return { props: { message: 'notLogin' } };
+      return { props: { message: "notLogin" } };
     } finally {
-      api.defaults.headers.Cookie = '';
+      api.defaults.headers.Cookie = "";
     }
   });
 
@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps =
 export default function MyPage({ message }: { message: string }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    if (message === 'notLogin') {
+    if (message === "notLogin") {
       setOpen(true);
     }
   }, [message]);
