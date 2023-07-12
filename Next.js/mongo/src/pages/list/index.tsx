@@ -6,7 +6,7 @@ type MessageType = {
   title: string;
   content: string;
 };
-
+//D
 export async function getServerSideProps() {
   const message = await results;
   const serializedMessages = JSON.parse(JSON.stringify(message));

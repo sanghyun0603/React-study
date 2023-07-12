@@ -1,14 +1,13 @@
 const changed = (nums) => {
-    const newnums = nums.map((num) => {
-        if (typeof num === "string") {
-            let a = Number(num);
-            return Number(num);
-        }
-        else {
-            return num + 1;
-        }
-    });
-    return newnums;
+  const newnums = nums.map((num) => {
+    if (typeof num === "string") {
+      let a = Number(num);
+      return Number(num);
+    } else {
+      return num + 1;
+    }
+  });
+  return newnums;
 };
 console.log(changed([123, "3"]));
 // var changed = function (nums) {
