@@ -27,7 +27,7 @@ export default function List({ message }: any) {
             <div className="list-item" key={i}>
               <div className="flex flex-row justify-between border-b-2">
                 <Link href={`/detail/${data._id}`}>
-                  <div className="ms-10 mt-2">글제목 : {data.title}</div>
+                  <div className="ms-10 mt-2">글제목: {data.title}</div>
                 </Link>
                 <div>
                   <Link href={`/update/${data._id}`}>
