@@ -1,7 +1,9 @@
+import Banner from "@/components/Banner";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <p>현대카드 무이자 이벤트중</p>
+      <Banner content="현카드" />
       {children}
     </div>
   );

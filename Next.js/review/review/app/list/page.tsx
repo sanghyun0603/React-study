@@ -1,16 +1,42 @@
+"use client";
+
+import { CsBtn } from "@/components/CustomButton";
 import "../globals.css";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function list() {
+  let goods = ["Tomato", "Pasta", "Coconut"];
+  let [count, setCount] = useState([0, 0, 0]);
   return (
     <div>
-      <div className="from-stone-500 text-center">
-        <div>Products</div>
-        <div className="food">
-          <h4>상품명</h4>
-        </div>
-        <div className="food">
-          <h4>상품명</h4>
-        </div>
+      <div className="text-center">
+        <div className="text-red-500">Products</div>
+        {goods.map((good, i) => {
+          return (
+            <div className="food" key={i}>
+              <Image
+                src={`/food${i}.png`}
+                alt="no_img"
+                width={250}
+                height={250}
+              />
+              <h4>{good}</h4>
+              <CsBtn
+                color="bg-red-300"
+                round="rounded-lg"
+                onClick={() => {
+                  let temp = [...count];
+                  temp[i]++;
+                  setCount(temp);
+                }}
+              >
+                +
+              </CsBtn>
+              <p>{count[i]}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
