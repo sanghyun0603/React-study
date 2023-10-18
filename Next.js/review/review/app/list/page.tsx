@@ -22,18 +22,34 @@ export default function list() {
                 height={250}
               />
               <h4>{good}</h4>
-              <CsBtn
-                color="bg-red-300"
-                round="rounded-lg"
-                onClick={() => {
-                  let temp = [...count];
-                  temp[i]++;
-                  setCount(temp);
-                }}
-              >
-                +
-              </CsBtn>
-              <p>{count[i]}</p>
+              <div className="flex justify-around">
+                <CsBtn
+                  color="bg-red-300"
+                  round="rounded-lg"
+                  onClick={() => {
+                    let temp = [...count];
+                    if (temp[i] > 0) {
+                      temp[i]--;
+                    }
+
+                    setCount(temp);
+                  }}
+                >
+                  +
+                </CsBtn>
+                <div>{count[i]}</div>
+                <CsBtn
+                  color="bg-red-300"
+                  round="rounded-lg"
+                  onClick={() => {
+                    let temp = [...count];
+                    temp[i]++;
+                    setCount(temp);
+                  }}
+                >
+                  +
+                </CsBtn>
+              </div>
             </div>
           );
         })}
