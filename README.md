@@ -88,8 +88,6 @@ useMemo & useCallback
 
 - useCallback은 함수를 memozation 할때 사용
 
-
-
 Redux 3가지 원칙
 
 - 전체 상태값을 하나의 객체에 저장한다.
@@ -136,3 +134,7 @@ Redux 3가지 원칙
 - redux-devtools에서 이 type으로 확인할 수 있다.
 
 - Action Creater <- 액션 만드는 함
+
+## MVC패턴과 FLUX패턴
+
+FLUX패턴을 redux에 적용한다.
